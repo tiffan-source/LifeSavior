@@ -39,6 +39,14 @@ export class InMemoryLabelRepository implements ILabelRepository {
     return this.labels.filter(l => names.includes(l.name));
   }
 
+  async findAll(): Promise<ILabel[]> {
+    return [...this.labels];
+  }
+
+  async findById(id: string): Promise<ILabel | undefined> {
+    return this.labels.find(l => l.id === id);
+  }
+
   async save(label: ILabel): Promise<ILabel> {
     const hiddenLabel = label as any;
     // Simulate ID generation if not present (simple mock behavior)
@@ -82,6 +90,13 @@ export class InMemoryTodoRepository implements ITodoRepository {
 
   async findById(id: string): Promise<ITodo | undefined> {
     return this.todos.find(t => t.id === id);
+  }
+
+  async deleteById(id: string): Promise<void> {
+    const idx = this.todos.findIndex(t => t.id === id);
+    if (idx >= 0) {
+      this.todos.splice(idx, 1);
+    }
   }
 }
 

@@ -32,4 +32,10 @@ export interface ITodoRepository {
    * @returns Liste des tâches trouvées.
    */
   findAll(filters?: TodoFilters): Promise<ITodo[]>;
+
+  /**
+   * Supprime une tâche par son identifiant.
+   * @param id Identifiant de la tâche.
+   */
+  deleteById(id: string): Promise<void>;
 }
