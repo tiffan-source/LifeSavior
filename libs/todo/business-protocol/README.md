@@ -8,6 +8,8 @@ C'est la couche d'abstraction pure : aucune dépendance vers l'implémentation l
 
 ### Use Cases
 - `ICreateTodoUseCase` : Création de tâche avec gestion des labels (existants ou volée).
+- `IGetAllTodoUseCase` : Récupération des tâches avec filtres optionnels.
+- `IEditTodoUseCase` : Mise à jour d'une tâche (titre, description, statut, labels).
 
 ### Ports (Infrastructure)
 - `ITodoRepository` : Persistance des tâches.
