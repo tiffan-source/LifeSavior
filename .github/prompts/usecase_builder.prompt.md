@@ -1,4 +1,5 @@
-@05_business_usecase_split_pattern.md @02_clean_architecture_solid_rules.md @03_documentation_standards.md @01_global_semantic_standards.md
+@05_business_usecase_split_pattern.md @02_clean_architecture_solid_rules.md @03_documentation_standards.md @01_global_semantic_standards.md @04_entity_design_pattern.md
+@06_error_handling_standards.md @09_tdd_workflow_standards.md
 
 # 👤 RÔLE (Persona)
 Agis en tant qu'Architecte Logiciel Senior et Expert TDD.
