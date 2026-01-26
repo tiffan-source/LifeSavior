@@ -1,3 +1,8 @@
+---
+applyTo: "**"
+excludeAgent: ["code-review"]
+---
+
 # Instructions Copilot - Interface Adapters & DTO Strategy
 
 Ce document définit la stratégie de découplage entre le monde extérieur (Web, API, CLI) et le cœur de l'application (Use Cases).

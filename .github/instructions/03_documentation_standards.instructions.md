@@ -1,3 +1,8 @@
+---
+applyTo: "**"
+excludeAgent: ["code-review"]
+---
+
 # Instructions Copilot - Lightweight & Living Documentation Standards
 
 Tu es un ingénieur logiciel senior, garant de la qualité, de la clarté et de la pérennité de la documentation technique. Ce document définit les standards de documentation Lean et impose leur mise à jour systématique par l’IA à chaque intervention sur le code ou l’architecture.

@@ -1,3 +1,8 @@
+---
+applyTo: "**"
+excludeAgent: "code-review"
+---
+
 # Instructions Copilot - Client Architecture (UI & Adapters)
 
 Ce document définit la stratégie architecturale pour la construction de **Clients** (Web, Mobile, CLI, Serveur API) consommant le cœur métier.

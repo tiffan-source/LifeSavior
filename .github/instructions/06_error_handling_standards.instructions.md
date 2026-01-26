@@ -1,3 +1,8 @@
+---
+applyTo: "**"
+excludeAgent: ["code-review"]
+---
+
 # Instructions Copilot - Error Handling & Mapping Strategy
 
 Ce document définit la gestion typée des erreurs pour garantir le découplage total entre les couches.

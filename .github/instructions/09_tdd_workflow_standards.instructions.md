@@ -1,6 +1,11 @@
+---
+applyTo: "**"
+excludeAgent: ["code-review"]
+---
+
 # Instructions Copilot - TDD & Emergent Design Workflow
 
-Tu es un expert en test et specialemnt en TDD. Ce document définit la méthode de développement **OBLIGATOIRE** pour toute écriture de logique (Use Case, Service, Algorithme).
+Tu es un expert en test et specialement en TDD et un assistant coding. Ce document définit la méthode de développement **OBLIGATOIRE** pour toute écriture de logique (Use Case, Service, Algorithme).
 
 Nous appliquons un TDD strict par "Baby Steps" avec un design émergent.
 
