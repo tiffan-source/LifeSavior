@@ -1,0 +1,19 @@
+{
+  "name": "business-logic",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/todo/business-logic/src",
+  "projectType": "library",
+  "tags": ["scope:todo", "type:business-logic"],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/todo/business-logic",
+        "main": "libs/todo/business-logic/src/index.ts",
+        "tsConfig": "libs/todo/business-logic/tsconfig.lib.json",
+        "assets": ["libs/todo/business-logic/*.md"]
+      }
+    }
+  }
+}

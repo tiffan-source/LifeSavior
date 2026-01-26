@@ -1,3 +1,5 @@
+import { ILabel } from './label.interface';
+
 /**
  * Représente une tâche dans le système.
  */
@@ -6,6 +8,7 @@ export interface ITodo {
   title: string;
   description: string;
   isDone: boolean;
+  labels: ILabel[];
   createdAt: Date;
   updatedAt: Date;
 

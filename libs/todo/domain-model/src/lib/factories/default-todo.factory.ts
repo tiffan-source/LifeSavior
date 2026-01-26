@@ -1,4 +1,4 @@
-import { ITodo, ITodoFactory, InvalidTodoTitleError } from '@org/todo-domain-protocol';
+import { ITodo, ITodoFactory, InvalidTodoTitleError, ILabel } from '@org/todo-domain-protocol';
 import { DefaultTodo } from '../entities/default-todo.entity';
 
 /**
@@ -9,9 +9,10 @@ export class DefaultTodoFactory implements ITodoFactory {
    * Crée une nouvelle instance de Todo.
    * @param title Titre de la tâche
    * @param description Description de la tâche
+   * @param labels Liste optionnelle de labels
    * @throws {InvalidTodoTitleError} Si le titre est vide
    */
-  create(title: string, description: string): ITodo {
+  create(title: string, description: string, labels: ILabel[] = []): ITodo {
     if (!title || title.trim() === '') {
       throw new InvalidTodoTitleError();
     }
@@ -26,7 +27,8 @@ export class DefaultTodoFactory implements ITodoFactory {
       description,
       false,
       now,
-      now
+      now,
+      labels
     );
   }
 }

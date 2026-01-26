@@ -15,6 +15,7 @@ describe('DefaultTodo Entity', () => {
       expect(todo.title).toBe(title);
       expect(todo.description).toBe(description);
       expect(todo.isDone).toBe(false);
+      expect(todo.labels).toEqual([]);
       expect(todo.createdAt).toBeInstanceOf(Date);
       expect(todo.updatedAt).toBeInstanceOf(Date);
     });

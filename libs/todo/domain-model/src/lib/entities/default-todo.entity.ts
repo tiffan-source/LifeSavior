@@ -1,4 +1,4 @@
-import { ITodo, InvalidTodoTitleError } from '@org/todo-domain-protocol';
+import { ITodo, InvalidTodoTitleError, ILabel } from '@org/todo-domain-protocol';
 
 /**
  * Implémentation par défaut de l'entité Todo.
@@ -10,7 +10,8 @@ export class DefaultTodo implements ITodo {
     public description: string,
     public isDone: boolean,
     public createdAt: Date,
-    public updatedAt: Date
+    public updatedAt: Date,
+    public labels: ILabel[] = []
   ) {}
 
   /**

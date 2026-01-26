@@ -16,7 +16,9 @@
     "baseUrl": ".",
     "paths": {
       "@org/todo-domain-protocol": ["libs/todo/domain-protocol/src/index.ts"],
-      "@org/todo-domain-model": ["libs/todo/domain-model/src/index.ts"]
+      "@org/todo-domain-model": ["libs/todo/domain-model/src/index.ts"],
+      "@org/business-protocol": ["libs/todo/business-protocol/src/index.ts"],
+      "@org/business-logic": ["libs/todo/business-logic/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
