@@ -1,51 +1,61 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { describe, it, expect, beforeEach } from 'vitest';
 import { GetAllTodoUseCase } from './get-all-todo.usecase';
-import { ITodoRepository } from '@org/business-protocol';
-import { ITodo } from '@org/todo-domain-protocol';
+import {
+  InMemoryTodoRepository,
+  FakeTodo
+} from './testing/in-memory';
 
-// --- Mocks ---
-const mockTodoRepository = {
-  findAll: vi.fn(),
-} as unknown as ITodoRepository;
-
-// --- Helpers ---
-const mockTodo = (id: string, title: string, isDone: boolean = false): ITodo => ({
-  id, title, description: 'Desc', isDone, labels: [], createdAt: new Date(), updatedAt: new Date(),
-  markAsDone: vi.fn(), updateTitle: vi.fn()
-});
-
-describe('GetAllTodoUseCase', () => {
+describe('GetAllTodoUseCase (TDD Strict)', () => {
   let useCase: GetAllTodoUseCase;
+  let todoRepo: InMemoryTodoRepository;
 
   beforeEach(() => {
-    vi.clearAllMocks();
-    useCase = new GetAllTodoUseCase(mockTodoRepository);
+    todoRepo = new InMemoryTodoRepository();
+    useCase = new GetAllTodoUseCase(todoRepo);
   });
 
   it('should return all todos when no filter is provided', async () => {
     // Arrange
-    const todos = [mockTodo('1', 'Tâche 1'), mockTodo('2', 'Tâche 2')];
-    vi.mocked(mockTodoRepository.findAll).mockResolvedValue(todos);
+    const t1 = new FakeTodo('1', 'Tâche 1', 'Desc', false, [], new Date(), new Date());
+    const t2 = new FakeTodo('2', 'Tâche 2', 'Desc', false, [], new Date(), new Date());
+    await todoRepo.save(t1);
+    await todoRepo.save(t2);
 
     // Act
     const result = await useCase.execute({});
 
     // Assert
-    expect(mockTodoRepository.findAll).toHaveBeenCalledWith(undefined);
-    expect(result).toEqual(todos);
+    expect(result).toHaveLength(2);
+    expect(result.map(t => t.id)).toEqual(expect.arrayContaining(['1', '2']));
   });
 
-  it('should pass filters to repository', async () => {
+  it('should filter todos by title', async () => {
     // Arrange
-    const filters = { title: 'Tâche', isDone: true };
-    const todos = [mockTodo('1', 'Tâche 1', true)];
-    vi.mocked(mockTodoRepository.findAll).mockResolvedValue(todos);
+    const t1 = new FakeTodo('1', 'Buy Milk', 'Desc', false, [], new Date(), new Date());
+    const t2 = new FakeTodo('2', 'Walk Dog', 'Desc', false, [], new Date(), new Date());
+    await todoRepo.save(t1);
+    await todoRepo.save(t2);
 
     // Act
-    const result = await useCase.execute({ filters });
+    const result = await useCase.execute({ filters: { title: 'Milk' } });
 
     // Assert
-    expect(mockTodoRepository.findAll).toHaveBeenCalledWith(filters);
-    expect(result).toEqual(todos);
+    expect(result).toHaveLength(1);
+    expect(result[0].title).toBe('Buy Milk');
+  });
+
+  it('should filter todos by status (isDone)', async () => {
+    // Arrange
+    const t1 = new FakeTodo('1', 'Tâche 1', 'Desc', true, [], new Date(), new Date());
+    const t2 = new FakeTodo('2', 'Tâche 2', 'Desc', false, [], new Date(), new Date());
+    await todoRepo.save(t1);
+    await todoRepo.save(t2);
+
+    // Act
+    const result = await useCase.execute({ filters: { isDone: true } });
+
+    // Assert
+    expect(result).toHaveLength(1);
+    expect(result[0].id).toBe('1');
   });
 });

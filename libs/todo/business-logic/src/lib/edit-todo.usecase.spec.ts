@@ -1,51 +1,29 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { describe, it, expect, beforeEach } from 'vitest';
 import { EditTodoUseCase } from './edit-todo.usecase';
 import {
-  ITodoRepository,
-  ILabelRepository,
-  EditTodoRequest,
-} from '@org/business-protocol';
-import { ITodo, ILabel } from '@org/todo-domain-protocol';
+  InMemoryLabelRepository,
+  InMemoryTodoRepository,
+  FakeTodo,
+  FakeLabel
+} from './testing/in-memory';
 
-describe('EditTodoUseCase', () => {
+describe('EditTodoUseCase (TDD Strict)', () => {
   let useCase: EditTodoUseCase;
-  let todoRepository: ITodoRepository;
-  let labelRepository: ILabelRepository;
+  let todoRepo: InMemoryTodoRepository;
+  let labelRepo: InMemoryLabelRepository;
+  let existingTodo: FakeTodo;
 
-  const mockTodo = (id: string, title: string, labels: ILabel[] = []): ITodo => ({
-    id,
-    title,
-    description: 'Old Description',
-    isDone: false,
-    labels,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    markAsDone: vi.fn(),
-    markAsUndone: vi.fn(),
-    updateTitle: vi.fn(),
-    updateDescription: vi.fn(),
-    updateLabels: vi.fn(),
-  });
+  beforeEach(async () => {
+    todoRepo = new InMemoryTodoRepository();
+    labelRepo = new InMemoryLabelRepository();
+    useCase = new EditTodoUseCase(todoRepo, labelRepo);
 
-  const existingTodo = mockTodo('todo-1', 'Old Title');
-
-  beforeEach(() => {
-    todoRepository = {
-      findById: vi.fn().mockResolvedValue(existingTodo),
-      save: vi.fn().mockImplementation((t) => Promise.resolve(t)),
-    } as unknown as ITodoRepository;
-
-    labelRepository = {
-      findByIds: vi.fn().mockResolvedValue([]),
-    } as unknown as ILabelRepository;
-
-    useCase = new EditTodoUseCase(todoRepository, labelRepository);
+    existingTodo = new FakeTodo('todo-1', 'Old Title', 'Old Description', false, [], new Date(), new Date());
+    await todoRepo.save(existingTodo);
   });
 
   it('should throw an error if todo is not found', async () => {
-    vi.spyOn(todoRepository, 'findById').mockResolvedValue(undefined);
-
-    const request: EditTodoRequest = {
+    const request = {
       todoId: 'non-existent',
       title: 'New Title',
     };
@@ -54,75 +32,75 @@ describe('EditTodoUseCase', () => {
   });
 
   it('should update the title if provided', async () => {
-    const request: EditTodoRequest = {
+    const request = {
       todoId: 'todo-1',
       title: 'New Title',
     };
 
     const result = await useCase.execute(request);
 
-    expect(existingTodo.updateTitle).toHaveBeenCalledWith('New Title');
-    expect(todoRepository.save).toHaveBeenCalledWith(existingTodo);
-    expect(result).toBe(existingTodo);
+    // Assert State
+    expect(result.title).toBe('New Title');
+    const saved = await todoRepo.findById('todo-1');
+    expect(saved?.title).toBe('New Title');
   });
 
   it('should update the description if provided', async () => {
-    const request: EditTodoRequest = {
+    const request = {
       todoId: 'todo-1',
       description: 'New Description',
     };
 
     const result = await useCase.execute(request);
 
-    expect(existingTodo.updateDescription).toHaveBeenCalledWith('New Description');
-    expect(todoRepository.save).toHaveBeenCalledWith(existingTodo);
+    expect(result.description).toBe('New Description');
   });
 
   it('should mark todo as done if isDone is true', async () => {
-    const request: EditTodoRequest = {
+    const request = {
       todoId: 'todo-1',
       isDone: true,
     };
 
     const result = await useCase.execute(request);
 
-    expect(existingTodo.markAsDone).toHaveBeenCalled();
-    expect(todoRepository.save).toHaveBeenCalledWith(existingTodo);
+    expect(result.isDone).toBe(true);
   });
 
   it('should mark todo as undone if isDone is false', async () => {
+    // Arrange: Ensure it starts as done
     existingTodo.isDone = true;
-    const request: EditTodoRequest = {
+    await todoRepo.save(existingTodo);
+
+    const request = {
       todoId: 'todo-1',
       isDone: false,
     };
 
     const result = await useCase.execute(request);
 
-    expect(existingTodo.markAsUndone).toHaveBeenCalled();
-    expect(todoRepository.save).toHaveBeenCalledWith(existingTodo);
+    expect(result.isDone).toBe(false);
   });
 
   it('should update labels if labelIds are provided', async () => {
-    const newLabel: ILabel = { id: 'label-1', name: 'Label 1', color: 'red', updateName: vi.fn(), updateColor: vi.fn() };
-    vi.spyOn(labelRepository, 'findByIds').mockResolvedValue([newLabel]);
+    // Arrange
+    const newLabel = new FakeLabel('label-1', 'Label 1', 'red');
+    await labelRepo.save(newLabel);
 
-    const request: EditTodoRequest = {
+    const request = {
       todoId: 'todo-1',
       labelIds: ['label-1'],
     };
 
     const result = await useCase.execute(request);
 
-    expect(labelRepository.findByIds).toHaveBeenCalledWith(['label-1']);
-    expect(existingTodo.updateLabels).toHaveBeenCalledWith([newLabel]);
-    expect(todoRepository.save).toHaveBeenCalledWith(existingTodo);
+    // Assert
+    expect(result.labels).toHaveLength(1);
+    expect(result.labels[0].id).toBe('label-1');
   });
 
   it('should throw error if some labels are not found', async () => {
-    vi.spyOn(labelRepository, 'findByIds').mockResolvedValue([]);
-
-    const request: EditTodoRequest = {
+    const request = {
       todoId: 'todo-1',
       labelIds: ['missing-label'],
     };
