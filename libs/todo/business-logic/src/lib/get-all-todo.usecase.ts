@@ -2,7 +2,7 @@ import {
   IGetAllTodoUseCase,
   GetAllTodoRequest,
   ITodoRepository
-} from '@org/business-protocol';
+} from '../../../business-protocol/src/index';
 import { ITodo } from '@org/todo-domain-protocol';
 
 export class GetAllTodoUseCase implements IGetAllTodoUseCase {

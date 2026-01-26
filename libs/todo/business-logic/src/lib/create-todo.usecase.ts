@@ -4,7 +4,7 @@ import {
   ITodoRepository,
   ILabelRepository,
   LabelNotFoundError
-} from '@org/business-protocol';
+} from '../../../business-protocol/src/index';
 import { ITodo, ITodoFactory, ILabelFactory, ILabel } from '@org/todo-domain-protocol';
 
 export class CreateTodoUseCase implements ICreateTodoUseCase {

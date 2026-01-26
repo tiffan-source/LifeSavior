@@ -9,6 +9,7 @@
       "executor": "@nx/js:tsc",
       "outputs": ["{options.outputPath}"],
       "options": {
+        "rootDir": "../../..",
         "outputPath": "dist/libs/todo/business-protocol",
         "main": "libs/todo/business-protocol/src/index.ts",
         "tsConfig": "libs/todo/business-protocol/tsconfig.lib.json",

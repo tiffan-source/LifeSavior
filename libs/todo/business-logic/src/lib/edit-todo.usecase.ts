@@ -1,4 +1,4 @@
-import { IEditTodoUseCase, EditTodoRequest, ITodoRepository, ILabelRepository } from '@org/business-protocol';
+import { IEditTodoUseCase, EditTodoRequest, ITodoRepository, ILabelRepository } from '../../../business-protocol/src/index';
 import { ITodo } from '@org/todo-domain-protocol';
 
 export class EditTodoUseCase implements IEditTodoUseCase {

@@ -9,6 +9,7 @@
       "executor": "@nx/js:tsc",
       "outputs": ["{options.outputPath}"],
       "options": {
+        "rootDir": "../../..",
         "outputPath": "dist/libs/todo/business-logic",
         "main": "libs/todo/business-logic/src/index.ts",
         "tsConfig": "libs/todo/business-logic/tsconfig.lib.json",

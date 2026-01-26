@@ -1,4 +1,4 @@
-import { ITodoRepository, ILabelRepository, TodoFilters } from '@org/business-protocol';
+import { ITodoRepository, ILabelRepository, TodoFilters } from '../../../../business-protocol/src/index';
 import { ITodo, ILabel, ITodoFactory, ILabelFactory, InvalidTodoTitleError } from '@org/todo-domain-protocol';
 
 export class FakeLabel implements ILabel {
