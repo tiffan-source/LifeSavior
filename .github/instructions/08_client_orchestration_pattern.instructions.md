@@ -1,6 +1,6 @@
 ---
 applyTo: "**"
-excludeAgent: "code-review"
+excludeAgent: ["code-review"]
 ---
 
 # Instructions Copilot - Client Architecture (UI & Adapters)

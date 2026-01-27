@@ -17,10 +17,10 @@
     "paths": {
       "@org/todo-domain-protocol": ["libs/todo/domain-protocol/src/index.ts"],
       "@org/todo-domain-model": ["libs/todo/domain-model/src/index.ts"],
-      "@org/business-protocol": ["libs/todo/business-protocol/src/index.ts"],
-      "@org/business-logic": ["libs/todo/business-logic/src/index.ts"],
-      "@org/infrastructure": ["libs/todo/infrastructure/src/index.ts"],
-      "@org/api": ["libs/todo/api/src/index.ts"]
+      "@org/todo-business-protocol": ["libs/todo/business-protocol/src/index.ts"],
+      "@org/todo-business-logic": ["libs/todo/business-logic/src/index.ts"],
+      "@org/todo-infra": ["libs/todo/todo-infra/src/index.ts"],
+      "@org/todo-api": ["libs/todo/api/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
