@@ -18,8 +18,8 @@ describe('EditLabelUseCase', () => {
       labelId: '1',
       name: 'Updated Work'
     });
-    expect(result.name).toBe('Updated Work');
-    expect(result.color).toBe('#FF0000');
+    expect(result.getName()).toBe('Updated Work');
+    expect(result.getColor()).toBe('#FF0000');
   });
 
   it('should update label color', async () => {
@@ -27,8 +27,8 @@ describe('EditLabelUseCase', () => {
       labelId: '1',
       color: '#00FF00'
     });
-    expect(result.name).toBe('Work');
-    expect(result.color).toBe('#00FF00');
+    expect(result.getName()).toBe('Work');
+    expect(result.getColor()).toBe('#00FF00');
   });
 
   it('should update both name and color', async () => {
@@ -37,7 +37,7 @@ describe('EditLabelUseCase', () => {
       name: 'Updated Work',
       color: '#00FF00'
     });
-    expect(result.name).toBe('Updated Work');
-    expect(result.color).toBe('#00FF00');
+    expect(result.getName()).toBe('Updated Work');
+    expect(result.getColor()).toBe('#00FF00');
   });
 });

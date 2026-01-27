@@ -4,13 +4,40 @@ import { ILabel } from './label.interface';
  * Représente une tâche dans le système.
  */
 export interface ITodo {
-  id: string;
-  title: string;
-  description: string;
-  isDone: boolean;
-  labels: ILabel[];
-  createdAt: Date;
-  updatedAt: Date;
+  /**
+   * Retourne l'identifiant unique de la tâche.
+   */
+  getId(): string;
+
+  /**
+   * Retourne le titre de la tâche.
+   */
+  getTitle(): string;
+
+  /**
+   * Retourne la description de la tâche.
+   */
+  getDescription(): string;
+
+  /**
+   * Retourne l'état d'accomplissement de la tâche.
+   */
+  getIsDone(): boolean;
+
+  /**
+   * Retourne les labels associés à la tâche.
+   */
+  getLabels(): ILabel[];
+
+  /**
+   * Retourne la date de création de la tâche.
+   */
+  getCreatedAt(): Date;
+
+  /**
+   * Retourne la date de dernière modification.
+   */
+  getUpdatedAt(): Date;
 
   /**
    * Marque la tâche comme terminée.

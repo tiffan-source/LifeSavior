@@ -23,13 +23,13 @@ describe('DeleteTodoUseCase (TDD Strict)', () => {
     await todoRepo.save(todo);
 
     // Verify it exists before deletion
-    expect(await todoRepo.findById(todo.id)).toBeDefined();
+    expect(await todoRepo.findById(todo.getId())).toBeDefined();
 
     // Act: Delete the todo
-    await useCase.execute({ id: todo.id });
+    await useCase.execute({ id: todo.getId() });
 
     // Assert: Verify it no longer exists (State Verification)
-    const found = await todoRepo.findById(todo.id);
+    const found = await todoRepo.findById(todo.getId());
     expect(found).toBeUndefined();
   });
 
@@ -48,11 +48,11 @@ describe('DeleteTodoUseCase (TDD Strict)', () => {
     await todoRepo.save(todo2);
 
     // Act: Delete only the first todo
-    await useCase.execute({ id: todo1.id });
+    await useCase.execute({ id: todo1.getId() });
 
     // Assert: First todo should be gone, second should remain
-    expect(await todoRepo.findById(todo1.id)).toBeUndefined();
-    expect(await todoRepo.findById(todo2.id)).toBeDefined();
+    expect(await todoRepo.findById(todo1.getId())).toBeUndefined();
+    expect(await todoRepo.findById(todo2.getId())).toBeDefined();
     expect((await todoRepo.findAll()).length).toBe(1);
   });
 });

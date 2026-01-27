@@ -2,9 +2,20 @@
  * Représente un label (catégorie) pour une tâche.
  */
 export interface ILabel {
-  id: string;
-  name: string;
-  color: string;
+  /**
+   * Retourne l'identifiant unique du label.
+   */
+  getId(): string;
+
+  /**
+   * Retourne le nom du label.
+   */
+  getName(): string;
+
+  /**
+   * Retourne la couleur du label.
+   */
+  getColor(): string;
 
   /**
    * Met à jour le nom du label.

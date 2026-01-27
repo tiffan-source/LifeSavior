@@ -40,9 +40,9 @@ describe('EditTodoUseCase (TDD Strict)', () => {
     const result = await useCase.execute(request);
 
     // Assert State
-    expect(result.title).toBe('New Title');
+    expect(result.getTitle()).toBe('New Title');
     const saved = await todoRepo.findById('todo-1');
-    expect(saved?.title).toBe('New Title');
+    expect(saved?.getTitle()).toBe('New Title');
   });
 
   it('should update the description if provided', async () => {
@@ -53,7 +53,7 @@ describe('EditTodoUseCase (TDD Strict)', () => {
 
     const result = await useCase.execute(request);
 
-    expect(result.description).toBe('New Description');
+    expect(result.getDescription()).toBe('New Description');
   });
 
   it('should mark todo as done if isDone is true', async () => {
@@ -64,12 +64,12 @@ describe('EditTodoUseCase (TDD Strict)', () => {
 
     const result = await useCase.execute(request);
 
-    expect(result.isDone).toBe(true);
+    expect(result.getIsDone()).toBe(true);
   });
 
   it('should mark todo as undone if isDone is false', async () => {
     // Arrange: Ensure it starts as done
-    existingTodo.isDone = true;
+    existingTodo.markAsDone();
     await todoRepo.save(existingTodo);
 
     const request = {
@@ -79,7 +79,7 @@ describe('EditTodoUseCase (TDD Strict)', () => {
 
     const result = await useCase.execute(request);
 
-    expect(result.isDone).toBe(false);
+    expect(result.getIsDone()).toBe(false);
   });
 
   it('should update labels if labelIds are provided', async () => {
@@ -95,8 +95,8 @@ describe('EditTodoUseCase (TDD Strict)', () => {
     const result = await useCase.execute(request);
 
     // Assert
-    expect(result.labels).toHaveLength(1);
-    expect(result.labels[0].id).toBe('label-1');
+    expect(result.getLabels()).toHaveLength(1);
+    expect(result.getLabels()[0].getId()).toBe('label-1');
   });
 
   it('should throw error if some labels are not found', async () => {

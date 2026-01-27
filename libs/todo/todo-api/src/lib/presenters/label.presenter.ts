@@ -13,9 +13,9 @@ export class LabelPresenter {
    */
   present(label: ILabel): LabelResponseDto {
     return {
-      id: label.id,
-      name: label.name,
-      color: label.color,
+      id: label.getId(),
+      name: label.getName(),
+      color: label.getColor(),
     };
   }
 

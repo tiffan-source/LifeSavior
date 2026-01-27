@@ -32,12 +32,12 @@ describe('CreateTodoUseCase (TDD Strict)', () => {
     });
 
     // Assert (State Verification)
-    expect(result.id).toBeDefined();
-    expect(result.title).toBe('My Todo');
+    expect(result.getId()).toBeDefined();
+    expect(result.getTitle()).toBe('My Todo');
 
-    const saved = await todoRepo.findById(result.id);
+    const saved = await todoRepo.findById(result.getId());
     expect(saved).toBeDefined();
-    expect(saved?.title).toBe('My Todo');
+    expect(saved?.getTitle()).toBe('My Todo');
   });
 
   it('should throw if labels ids do not exist', async () => {
@@ -60,11 +60,11 @@ describe('CreateTodoUseCase (TDD Strict)', () => {
     });
 
     // Assert
-    expect(result.labels).toHaveLength(1);
-    expect(result.labels[0].id).toBe('l1');
+    expect(result.getLabels()).toHaveLength(1);
+    expect(result.getLabels()[0].getId()).toBe('l1');
 
-    const saved = await todoRepo.findById(result.id);
-    expect(saved?.labels[0].id).toBe('l1');
+    const saved = await todoRepo.findById(result.getId());
+    expect(saved?.getLabels()[0].getId()).toBe('l1');
   });
 
   it('should create new labels on the fly if provided by name', async () => {
@@ -75,8 +75,8 @@ describe('CreateTodoUseCase (TDD Strict)', () => {
     });
 
     // Assert
-    expect(result.labels).toHaveLength(1);
-    expect(result.labels[0].name).toBe('Urgent');
+    expect(result.getLabels()).toHaveLength(1);
+    expect(result.getLabels()[0].getName()).toBe('Urgent');
 
     // Verify label persisted
     const allLabels = await labelRepo.findByNames(['Urgent']);
@@ -95,7 +95,7 @@ describe('CreateTodoUseCase (TDD Strict)', () => {
     });
 
     // Assert
-    expect(result.labels).toHaveLength(1);
-    expect(result.labels[0].id).toBe('l2'); // Should be the existing one
+    expect(result.getLabels()).toHaveLength(1);
+    expect(result.getLabels()[0].getId()).toBe('l2'); // Should be the existing one
   });
 });

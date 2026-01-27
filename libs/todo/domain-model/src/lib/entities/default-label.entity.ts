@@ -4,11 +4,36 @@ import { ILabel, InvalidLabelNameError } from '@org/todo-domain-protocol';
  * Implémentation par défaut de l'entité Label.
  */
 export class DefaultLabel implements ILabel {
-  constructor(
-    public id: string,
-    public name: string,
-    public color: string
-  ) {}
+  private readonly id: string;
+  private name: string;
+  private color: string;
+
+  constructor(id: string, name: string, color: string) {
+    this.id = id;
+    this.name = name;
+    this.color = color;
+  }
+
+  /**
+   * Retourne l'identifiant unique du label.
+   */
+  getId(): string {
+    return this.id;
+  }
+
+  /**
+   * Retourne le nom du label.
+   */
+  getName(): string {
+    return this.name;
+  }
+
+  /**
+   * Retourne la couleur du label.
+   */
+  getColor(): string {
+    return this.color;
+  }
 
   /**
    * Met à jour le nom du label.
@@ -27,7 +52,6 @@ export class DefaultLabel implements ILabel {
    * @param color Nouvelle couleur
    */
   updateColor(color: string): void {
-     // Validation could be added here
-     this.color = color;
+    this.color = color;
   }
 }

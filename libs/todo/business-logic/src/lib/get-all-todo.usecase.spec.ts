@@ -26,7 +26,7 @@ describe('GetAllTodoUseCase (TDD Strict)', () => {
 
     // Assert
     expect(result).toHaveLength(2);
-    expect(result.map(t => t.id)).toEqual(expect.arrayContaining(['1', '2']));
+    expect(result.map(t => t.getId())).toEqual(expect.arrayContaining(['1', '2']));
   });
 
   it('should filter todos by title', async () => {
@@ -41,7 +41,7 @@ describe('GetAllTodoUseCase (TDD Strict)', () => {
 
     // Assert
     expect(result).toHaveLength(1);
-    expect(result[0].title).toBe('Buy Milk');
+    expect(result[0].getTitle()).toBe('Buy Milk');
   });
 
   it('should filter todos by status (isDone)', async () => {
@@ -56,6 +56,6 @@ describe('GetAllTodoUseCase (TDD Strict)', () => {
 
     // Assert
     expect(result).toHaveLength(1);
-    expect(result[0].id).toBe('1');
+    expect(result[0].getId()).toBe('1');
   });
 });

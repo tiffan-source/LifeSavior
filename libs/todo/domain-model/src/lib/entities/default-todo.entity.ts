@@ -4,15 +4,80 @@ import { ITodo, InvalidTodoTitleError, ILabel } from '@org/todo-domain-protocol'
  * Implémentation par défaut de l'entité Todo.
  */
 export class DefaultTodo implements ITodo {
+  private readonly id: string;
+  private title: string;
+  private description: string;
+  private isDone: boolean;
+  private createdAt: Date;
+  private updatedAt: Date;
+  private labels: ILabel[];
+
   constructor(
-    public id: string,
-    public title: string,
-    public description: string,
-    public isDone: boolean,
-    public createdAt: Date,
-    public updatedAt: Date,
-    public labels: ILabel[] = []
-  ) {}
+    id: string,
+    title: string,
+    description: string,
+    isDone: boolean,
+    createdAt: Date,
+    updatedAt: Date,
+    labels: ILabel[] = []
+  ) {
+    this.id = id;
+    this.title = title;
+    this.description = description;
+    this.isDone = isDone;
+    this.createdAt = createdAt;
+    this.updatedAt = updatedAt;
+    this.labels = labels;
+  }
+
+  /**
+   * Retourne l'identifiant unique de la tâche.
+   */
+  getId(): string {
+    return this.id;
+  }
+
+  /**
+   * Retourne le titre de la tâche.
+   */
+  getTitle(): string {
+    return this.title;
+  }
+
+  /**
+   * Retourne la description de la tâche.
+   */
+  getDescription(): string {
+    return this.description;
+  }
+
+  /**
+   * Retourne l'état d'accomplissement de la tâche.
+   */
+  getIsDone(): boolean {
+    return this.isDone;
+  }
+
+  /**
+   * Retourne les labels associés à la tâche.
+   */
+  getLabels(): ILabel[] {
+    return [...this.labels];
+  }
+
+  /**
+   * Retourne la date de création de la tâche.
+   */
+  getCreatedAt(): Date {
+    return new Date(this.createdAt);
+  }
+
+  /**
+   * Retourne la date de dernière modification.
+   */
+  getUpdatedAt(): Date {
+    return new Date(this.updatedAt);
+  }
 
   /**
    * Marque la tâche comme terminée.

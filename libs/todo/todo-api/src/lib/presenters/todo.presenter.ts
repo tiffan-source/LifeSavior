@@ -17,17 +17,17 @@ export class TodoPresenter {
    */
   present(todo: ITodo): TodoResponseDto {
     return {
-      id: todo.id,
-      title: todo.title,
-      description: todo.description,
-      isDone: todo.isDone,
-      labels: todo.labels.map(label => ({
-        id: label.id,
-        name: label.name,
-        color: label.color,
+      id: todo.getId(),
+      title: todo.getTitle(),
+      description: todo.getDescription(),
+      isDone: todo.getIsDone(),
+      labels: todo.getLabels().map(label => ({
+        id: label.getId(),
+        name: label.getName(),
+        color: label.getColor(),
       })),
-      createdAt: todo.createdAt.toISOString(),
-      updatedAt: todo.updatedAt.toISOString(),
+      createdAt: todo.getCreatedAt().toISOString(),
+      updatedAt: todo.getUpdatedAt().toISOString(),
     };
   }
 

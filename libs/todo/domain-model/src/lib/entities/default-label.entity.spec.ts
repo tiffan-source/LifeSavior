@@ -11,9 +11,9 @@ describe('DefaultLabel Entity', () => {
       const color = '#FF0000';
       const label = factory.create(name, color);
 
-      expect(label.id).toBeDefined();
-      expect(label.name).toBe(name);
-      expect(label.color).toBe(color);
+      expect(label.getId()).toBeDefined();
+      expect(label.getName()).toBe(name);
+      expect(label.getColor()).toBe(color);
     });
 
     it('should throw InvalidLabelNameError when name is empty', () => {
@@ -26,7 +26,7 @@ describe('DefaultLabel Entity', () => {
     it('should update name', () => {
       const label = factory.create('Old Name', '#000');
       label.updateName('New Name');
-      expect(label.name).toBe('New Name');
+      expect(label.getName()).toBe('New Name');
     });
 
     it('should throw InvalidLabelNameError when updating with empty name', () => {
@@ -37,7 +37,7 @@ describe('DefaultLabel Entity', () => {
     it('should update color', () => {
       const label = factory.create('Name', '#000');
       label.updateColor('#FFF');
-      expect(label.color).toBe('#FFF');
+      expect(label.getColor()).toBe('#FFF');
     });
   });
 });

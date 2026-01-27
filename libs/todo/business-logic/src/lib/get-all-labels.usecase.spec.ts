@@ -18,6 +18,6 @@ describe('GetAllLabelsUseCase', () => {
   it('should return all labels', async () => {
     const result = await useCase.execute();
     expect(result).toHaveLength(2);
-    expect(result[0].name).toBe('Work');
+    expect(result[0].getName()).toBe('Work');
   });
 });
