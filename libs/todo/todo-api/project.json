@@ -1,7 +1,7 @@
 {
   "name": "todo-api",
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/todo-api/src",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/todo/todo-api/src",
   "projectType": "library",
   "tags": [],
   "// targets": "to see all targets run: nx show project todo-api --web",

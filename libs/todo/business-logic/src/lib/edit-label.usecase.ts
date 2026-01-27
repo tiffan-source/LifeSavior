@@ -14,7 +14,7 @@ export class EditLabelUseCase implements IEditLabelUseCase {
     const foundLabel = await this.labelRepository.findById(request.labelId);
 
     if (!foundLabel) {
-      throw new LabelNotFoundError(`Label with ID ${request.labelId} not found`);
+      throw new LabelNotFoundError([request.labelId]);
     }
 
     // Applique les mises à jour

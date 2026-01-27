@@ -6,10 +6,10 @@ import {
 } from '@nestjs/common';
 import { Response } from 'express';
 import {
-  InvalidTodoTitleError,
   LabelNotFoundError,
   TodoNotFoundError,
 } from '@org/todo-business-protocol';
+import {InvalidTodoTitleError} from '@org/todo-domain-protocol'
 
 /**
  * Exception Filter qui mappe les erreurs métier en réponses HTTP.

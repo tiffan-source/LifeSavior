@@ -11,9 +11,9 @@ export class TodoFactoryImpl implements ITodoFactory {
       title,
       description,
       false,
-      labels,
       new Date(),
-      new Date()
+      new Date(),
+      labels
     );
   }
 

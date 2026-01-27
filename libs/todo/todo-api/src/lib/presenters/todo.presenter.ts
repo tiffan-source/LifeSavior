@@ -1,6 +1,5 @@
-import { ITodo } from '@org/todo-domain-protocol';
+import { ITodo, InvalidTodoTitleError } from '@org/todo-domain-protocol';
 import {
-  InvalidTodoTitleError,
   LabelNotFoundError,
   TodoNotFoundError,
 } from '@org/todo-business-protocol';

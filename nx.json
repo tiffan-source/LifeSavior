@@ -114,7 +114,12 @@
       "options": {
         "targetName": "test"
       },
-      "exclude": ["apps/server-e2e/**/*", "apps-e2e/**/*"]
+      "exclude": [
+        "apps/server-e2e/**/*",
+        "apps-e2e/**/*",
+        "apps/lifesavior-manager-api-e2e/**/*",
+        "apps/lifesavior-manager-api-e2e/**/*"
+      ]
     }
   ],
   "generators": {

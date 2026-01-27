@@ -22,8 +22,7 @@
       ],
       "@org/todo-business-logic": ["libs/todo/business-logic/src/index.ts"],
       "@org/todo-infra": ["libs/todo/todo-infra/src/index.ts"],
-      "@org/todo-api": ["libs/todo-api/src/index.ts"],
-      "@org/todo-nest-api": ["libs/todo/todo-nest-api/src/index.ts"]
+      "@org/todo-api": ["libs/todo/todo-api/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

@@ -25,7 +25,7 @@ export class CreateTodoUseCase implements ICreateTodoUseCase {
       // Check for missing IDs
       if (foundById.length !== request.labelIds.length) {
         // Find which ones are missing for better error message
-        const foundIds = foundById.map(l => l.id);
+        const foundIds = foundById.map(l => l.getId());
         const missingIds = request.labelIds.filter(id => !foundIds.includes(id));
         throw new LabelNotFoundError(missingIds);
       }
@@ -41,7 +41,7 @@ export class CreateTodoUseCase implements ICreateTodoUseCase {
         const existingByName = await this.labelRepository.findByNames(names);
         labels.push(...existingByName);
 
-        const existingNames = existingByName.map(l => l.name);
+        const existingNames = existingByName.map(l => l.getName());
         const missingNames = names.filter(n => !existingNames.includes(n));
 
         for (const name of missingNames) {

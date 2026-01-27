@@ -1,4 +1,5 @@
-import { ILabelRepository, ILabel } from '@org/todo-business-protocol';
+import { ILabelRepository  } from '@org/todo-business-protocol';
+import { ILabel} from '@org/todo-domain-protocol'
 
 /**
  * Implémentation en mémoire du repository de labels (pour prototypage/test).
@@ -14,7 +15,7 @@ export class InMemoryLabelRepositoryImpl implements ILabelRepository {
 
   async findByNames(names: string[]): Promise<ILabel[]> {
     return Array.from(this.labels.values()).filter(l =>
-      names.includes(l.name)
+      names.includes(l.getName())
     );
   }
 
@@ -27,7 +28,7 @@ export class InMemoryLabelRepositoryImpl implements ILabelRepository {
   }
 
   async save(label: ILabel): Promise<ILabel> {
-    this.labels.set(label.id, label);
+    this.labels.set(label.getId(), label);
     return label;
   }
 }

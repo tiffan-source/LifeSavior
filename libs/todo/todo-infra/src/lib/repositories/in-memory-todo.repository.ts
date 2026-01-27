@@ -1,5 +1,5 @@
-import { ITodoRepository, ITodo, TodoFilters } from '@org/todo-business-protocol';
-
+import { ITodoRepository, TodoFilters } from '@org/todo-business-protocol';
+import {ITodo} from '@org/todo-domain-protocol'
 /**
  * Implémentation en mémoire du repository de todos (pour prototypage/test).
  */
@@ -7,7 +7,7 @@ export class InMemoryTodoRepositoryImpl implements ITodoRepository {
   private todos: Map<string, ITodo> = new Map();
 
   async save(todo: ITodo): Promise<ITodo> {
-    this.todos.set(todo.id, todo);
+    this.todos.set(todo.getId(), todo);
     return todo;
   }
 
@@ -15,11 +15,11 @@ export class InMemoryTodoRepositoryImpl implements ITodoRepository {
     let result = Array.from(this.todos.values());
 
     if (filters?.title) {
-      result = result.filter(t => t.title.includes(filters.title!));
+      result = result.filter(t => t.getTitle().includes(filters.title!));
     }
 
     if (filters?.isDone !== undefined) {
-      result = result.filter(t => t.isDone === filters.isDone);
+      result = result.filter(t => t.getIsDone() === filters.isDone);
     }
 
     return result;

@@ -1,4 +1,4 @@
-import { IDeleteTodoUseCase, DeleteTodoRequest, ITodoRepository, TodoNotFoundError } from '@org/business-protocol';
+import { IDeleteTodoUseCase, DeleteTodoRequest, ITodoRepository, TodoNotFoundError } from '@org/todo-business-protocol';
 
 /**
  * Use Case pour supprimer une tâche.

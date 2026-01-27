@@ -24,7 +24,7 @@ export default defineConfig(() => ({
   // Configuration for building your library.
   // See: https://vite.dev/guide/build.html#library-mode
   build: {
-    outDir: '../../dist/libs/todo-api',
+    outDir: '../../../dist/libs/todo-api',
     emptyOutDir: true,
     reportCompressedSize: true,
     commonjsOptions: {
@@ -52,7 +52,7 @@ export default defineConfig(() => ({
     include: ['{src,tests}/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
     reporters: ['default'],
     coverage: {
-      reportsDirectory: '../../coverage/libs/todo-api',
+      reportsDirectory: '../../../coverage/libs/todo-api',
       provider: 'v8' as const,
     },
   },

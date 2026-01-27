@@ -1,4 +1,5 @@
 import { Controller, Get, Put, Param, Body, UseFilters } from '@nestjs/common';
+import { ApiTags, ApiOperation, ApiResponse, ApiParam, ApiBody } from '@nestjs/swagger';
 import {
   IGetAllLabelsUseCase,
   IEditLabelUseCase,
@@ -13,6 +14,7 @@ import { BusinessErrorFilter } from '../filters/business-error.filter';
  * Controller pour les endpoints LABEL.
  * Utilise le pattern Presenter pour la transformation et la gestion d'erreur.
  */
+@ApiTags('labels')
 @Controller('labels')
 @UseFilters(BusinessErrorFilter)
 export class LabelController {
@@ -25,17 +27,25 @@ export class LabelController {
     private readonly editLabelUseCase: IEditLabelUseCase
   ) {}
 
+  @ApiOperation({ summary: 'Get all labels', description: 'Retrieve a list of all labels' })
+  @ApiResponse({ status: 200, description: 'List of labels', type: [LabelResponseDto] })
+  @ApiResponse({ status: 500, description: 'Internal server error' })
   @Get()
   async getAll(): Promise<LabelResponseDto[]> {
     try {
       const labels = await this.getAllLabelsUseCase.execute();
       return this.presenter.presentList(labels);
     } catch (error) {
-      this.presenter.handleError(error as Error);
+      throw this.presenter.handleError(error as Error);
     }
   }
 
   @Put(':id')
+  @ApiOperation({ summary: 'Update a label', description: 'Update an existing label by ID' })
+  @ApiParam({ name: 'id', description: 'Label ID' })
+  @ApiBody({ type: EditLabelDto })
+  @ApiResponse({ status: 200, description: 'Label updated successfully', type: LabelResponseDto })
+  @ApiResponse({ status: 404, description: 'Label not found' })
   async edit(
     @Param('id') id: string,
     @Body() dto: EditLabelDto
@@ -47,7 +57,7 @@ export class LabelController {
       });
       return this.presenter.present(label);
     } catch (error) {
-      this.presenter.handleError(error as Error);
+      throw this.presenter.handleError(error as Error);
     }
   }
 }
