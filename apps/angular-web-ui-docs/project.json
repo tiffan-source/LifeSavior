@@ -7,8 +7,10 @@
   "tags": [],
   "targets": {
     "build": {
-      "executor": "@angular/build:application",
-      "outputs": ["{options.outputPath}"],
+      "executor": "@ng-doc/builder:application",
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/angular-web-ui-docs",
         "browser": "apps/angular-web-ui-docs/src/main.ts",
@@ -16,15 +18,36 @@
         "assets": [
           {
             "glob": "**/*",
+            "input": "node_modules/@ng-doc/app/assets",
+            "output": "assets/ng-doc/app"
+          },
+          {
+            "glob": "**/*",
+            "input": "node_modules/@ng-doc/ui-kit/assets",
+            "output": "assets/ng-doc/ui-kit"
+          },
+          {
+            "glob": "**/*",
+            "input": "ng-doc/angular-web-ui-docs/assets",
+            "output": "assets/ng-doc"
+          },
+          {
+            "glob": "**/*",
             "input": "apps/angular-web-ui-docs/public"
           }
         ],
-        "styles": ["apps/angular-web-ui-docs/src/styles.css"],
+        "styles": [
+          "node_modules/@ng-doc/app/styles/global.css",
+          "apps/angular-web-ui-docs/src/styles.css"
+        ],
         "server": "apps/angular-web-ui-docs/src/main.server.ts",
         "ssr": {
           "entry": "apps/angular-web-ui-docs/src/server.ts"
         },
-        "outputMode": "server"
+        "outputMode": "server",
+        "allowedCommonJsDependencies": [
+          "@ng-doc/core"
+        ]
       },
       "configurations": {
         "production": {
@@ -52,7 +75,7 @@
     },
     "serve": {
       "continuous": true,
-      "executor": "@angular/build:dev-server",
+      "executor": "@ng-doc/builder:dev-server",
       "configurations": {
         "production": {
           "buildTarget": "angular-web-ui-docs:build:production"
