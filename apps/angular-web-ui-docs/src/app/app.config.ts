@@ -7,23 +7,7 @@ import {
 } from '@angular/core';
 import { provideRouter, withInMemoryScrolling } from '@angular/router';
 import { appRoutes } from './app.routes';
-import {
-  provideClientHydration,
-  withEventReplay,
-} from '@angular/platform-browser';
 
 export const appConfig: ApplicationConfig = {
-  providers: [
-    provideClientHydration(withEventReplay()),
-    provideBrowserGlobalErrorListeners(),
-    provideRouter(appRoutes),
-        provideHttpClient(withInterceptorsFromDi()),
-        provideRouter(NG_DOC_ROUTING, withInMemoryScrolling({scrollPositionRestoration: "enabled", anchorScrolling: "enabled"})),
-        provideHttpClient(withInterceptorsFromDi(), withFetch()),
-        provideNgDocContext(),
-        provideNgDocApp(),
-        provideSearchEngine(NgDocDefaultSearchEngine),
-        providePageSkeleton(NG_DOC_DEFAULT_PAGE_SKELETON),
-        provideMainPageProcessor(NG_DOC_DEFAULT_PAGE_PROCESSORS)
-    ],
+  providers: [provideBrowserGlobalErrorListeners(), provideRouter(appRoutes), provideHttpClient(withInterceptorsFromDi()), provideRouter(NG_DOC_ROUTING, withInMemoryScrolling({scrollPositionRestoration: "enabled", anchorScrolling: "enabled"})), provideHttpClient(withInterceptorsFromDi(), withFetch()), provideNgDocContext(), provideNgDocApp(), provideSearchEngine(NgDocDefaultSearchEngine), providePageSkeleton(NG_DOC_DEFAULT_PAGE_SKELETON), provideMainPageProcessor(NG_DOC_DEFAULT_PAGE_PROCESSORS)],
 };

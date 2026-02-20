@@ -40,11 +40,6 @@
           "node_modules/@ng-doc/app/styles/global.css",
           "apps/angular-web-ui-docs/src/styles.css"
         ],
-        "server": "apps/angular-web-ui-docs/src/main.server.ts",
-        "ssr": {
-          "entry": "apps/angular-web-ui-docs/src/server.ts"
-        },
-        "outputMode": "server",
         "allowedCommonJsDependencies": [
           "@ng-doc/core"
         ]

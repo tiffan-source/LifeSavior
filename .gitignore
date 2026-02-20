@@ -53,3 +53,6 @@ vitest.config.*.timestamp*
 
 # NgDoc files
 /ng-doc
+
+# NgDoc files
+/ng-doc
