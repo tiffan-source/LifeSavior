@@ -15,12 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@ng-doc/generated": [
-        "./ng-doc/angular-web-ui-docs/index.ts"
-      ],
-      "@ng-doc/generated/*": [
-        "./ng-doc/angular-web-ui-docs/*"
-      ],
+      "@ng-doc/generated": ["./ng-doc/angular-web-ui-docs/index.ts"],
+      "@ng-doc/generated/*": ["./ng-doc/angular-web-ui-docs/*"],
       "@org/todo-domain-protocol": ["libs/todo/domain-protocol/src/index.ts"],
       "@org/todo-domain-model": ["libs/todo/domain-model/src/index.ts"],
       "@org/todo-business-protocol": [
