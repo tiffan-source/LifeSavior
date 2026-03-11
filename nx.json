@@ -13,9 +13,7 @@
     {
       "plugin": "@nx/js/typescript",
       "options": {
-        "typecheck": {
-          "targetName": "typecheck"
-        },
+        "typecheck": { "targetName": "typecheck" },
         "build": {
           "targetName": "build",
           "configName": "tsconfig.lib.json",
@@ -33,14 +31,7 @@
       }
     }
   ],
-  "release": {
-    "version": {
-      "preVersionCommand": "npx nx run-many -t build"
-    }
-  },
-  "targetDefaults": {
-    "test": {
-      "dependsOn": ["^build"]
-    }
-  }
+  "release": { "version": { "preVersionCommand": "npx nx run-many -t build" } },
+  "targetDefaults": { "test": { "dependsOn": ["^build"] } },
+  "nxCloudId": "69b129056dbce50e914687e8"
 }
